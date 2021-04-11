@@ -1,4 +1,4 @@
-#### AnimeHoursFinder
+# AnimeHoursFinder
 Find the amount of hours you took to watch the anime you love.  
 
 Uses [unoffical mal api by Daren Liang](https://github.com/darenliang/mal-api) to get the data from [MyAnimeList](https://myanimelist.net/).  
