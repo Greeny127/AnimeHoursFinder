@@ -1,4 +1,3 @@
-import time
 import xml.etree.ElementTree as ET
 from mal import *
 
@@ -44,6 +43,7 @@ class Finder:
         '''
         dic = {}
 
+        #Parsing the MyAnimeList
         tree = ET.parse(file)
         root = tree.getroot()
 
@@ -83,7 +83,7 @@ class Finder:
 
                 total += duration
 
-            total = float(total / 60) #Convert to hours
+            total = float(round(total / 60)) #Convert to hours
             return total
 
         elif mode == "open":    #If mode is 'open' then it will use self.file. Ex - myanimelist.xml
@@ -98,7 +98,7 @@ class Finder:
 
                 num = list(data.keys()).index(malid)
 
-                print("{}/{} done - searching... MALid={}".format(str(num), totalen, malid), end='\r')
+                print("{}/{} done - searching... MALid={}          ".format(str(num), totalen, malid), end='\r')
                 anime = Anime(malid) #Search for anime
 
                 print("calculating...", end='\r')
@@ -113,32 +113,5 @@ class Finder:
 
                 total += duration
 
-            total = float(total / 60) #Converting to hours
+            total = float(round(total / 60)) #Converting to hours
             return total
-
-#Simple useage of both modes
-while True:
-    command = input(">")
-
-    if command == "help":
-        print(">text - finds hours watched from a string given in the following format: anime1, anime2, anime3")
-        print(">open - opens a MyAnimeList xml file and finds hours watched.")
-        print(">exit - exits the program")
-        print(">help - prints this message\n")
-
-    if command == "text":
-        lst = input("Enter anime, seperate with commas - ")
-        brain = Finder(lst)
-        hours = brain.find()
-
-        print("You've watched {} hours of anime\n".format(hours))
-
-    if command == "open":
-        file = input("Enter file directory - ")
-        brain = Finder(file=file)
-        hours = brain.find("open")
-
-        print("You've watched {} hours of anime\n".format(hours))
-
-    if command == "exit":
-        break
