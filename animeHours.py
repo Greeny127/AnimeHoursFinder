@@ -67,15 +67,12 @@ class Finder:
             total = 0
 
             for anime in self.animelist:
-                print("searching...", end='\r')
                 search = AnimeSearch(anime) #Searched for anime
 
                 newsearch = Anime(int(search.results[0].mal_id)) #searched with malid to get more access to data
 
                 duration = newsearch.duration.split()
                 duration = int(duration[0]) #Gets average duration per episodes
-
-                print("calculating...", end='\r')
 
                 eps = newsearch.episodes #gets total episodes
 
@@ -89,7 +86,6 @@ class Finder:
         elif mode == "open":    #If mode is 'open' then it will use self.file. Ex - myanimelist.xml
             total = 0
 
-            print("parsing...", end='\r')
             data = self.parse(self.file) #Parses xml file
 
             totalen = len(data.keys())
@@ -98,10 +94,8 @@ class Finder:
 
                 num = list(data.keys()).index(malid)
 
-                print("{}/{} done - searching... MALid={}          ".format(str(num), totalen, malid), end='\r')
                 anime = Anime(malid) #Search for anime
 
-                print("calculating...", end='\r')
                 try:
                     duration = anime.duration.split()
                     duration = int(duration[0]) #Get average duration per episode
